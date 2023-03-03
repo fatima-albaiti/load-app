@@ -20,11 +20,6 @@
 
     </com.google.android.material.appbar.AppBarLayout>
 
-<!--    <androidx.constraintlayout.motion.widget.MotionLayout-->
-<!--        android:layout_width="match_parent"-->
-<!--        android:layout_height="match_parent"-->
-<!--        app:layoutDescription="@layout/content_main"-->
-<!--        android:layout_marginTop="?actionBarSize" />-->
     <include layout="@layout/content_main" />
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>
