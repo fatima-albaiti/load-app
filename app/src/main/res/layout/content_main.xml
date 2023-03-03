@@ -10,6 +10,7 @@
     tools:context=".MainActivity"
     tools:showIn="@layout/activity_main">
     <RadioGroup
+        android:id="@+id/download_radio"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="20dp"

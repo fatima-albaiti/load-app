@@ -9,10 +9,13 @@ import android.content.Intent
 import android.content.IntentFilter
 import android.net.Uri
 import android.os.Bundle
+import android.widget.RadioGroup
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.NotificationCompat
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.content_main.*
+import kotlinx.android.synthetic.main.content_main.view.*
 
 
 class MainActivity : AppCompatActivity() {
@@ -30,8 +33,15 @@ class MainActivity : AppCompatActivity() {
 
         registerReceiver(receiver, IntentFilter(DownloadManager.ACTION_DOWNLOAD_COMPLETE))
 
+        val radioGroup = findViewById<RadioGroup>(R.id.download_radio)
+
         custom_button.setOnClickListener {
-            download()
+            when(radioGroup.checkedRadioButtonId){
+                R.id.glide -> download(GLIDE_URL)
+                R.id.loadapp -> download(APP_URL)
+                R.id.retrofit -> download(RETROFIT_URL)
+                else -> Toast.makeText(this, "You must select an option", Toast.LENGTH_SHORT).show()
+            }
         }
     }
 
@@ -41,9 +51,9 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
-    private fun download() {
+    private fun download(url: String) {
         val request =
-            DownloadManager.Request(Uri.parse(URL))
+            DownloadManager.Request(Uri.parse(url))
                 .setTitle(getString(R.string.app_name))
                 .setDescription(getString(R.string.app_description))
                 .setRequiresCharging(false)
@@ -56,8 +66,10 @@ class MainActivity : AppCompatActivity() {
     }
 
     companion object {
-        private const val URL =
+        private const val APP_URL =
             "https://github.com/udacity/nd940-c3-advanced-android-programming-project-starter/archive/master.zip"
+        private const val GLIDE_URL = "https://github.com/bumptech/glide/archive/master.zip"
+        private const val RETROFIT_URL = "https://github.com/square/retrofit.git/archive/master.zip"
         private const val CHANNEL_ID = "channelId"
     }
 
