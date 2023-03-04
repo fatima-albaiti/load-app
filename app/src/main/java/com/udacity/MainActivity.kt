@@ -36,6 +36,7 @@ class MainActivity : AppCompatActivity() {
         val radioGroup = findViewById<RadioGroup>(R.id.download_radio)
 
         custom_button.setOnClickListener {
+            custom_button.buttonState = ButtonState.Loading
             when(radioGroup.checkedRadioButtonId){
                 R.id.glide -> download(GLIDE_URL)
                 R.id.loadapp -> download(APP_URL)
