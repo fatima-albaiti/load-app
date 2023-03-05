@@ -25,7 +25,7 @@ class LoadingButton @JvmOverloads constructor(
     private var valueAnimator = ValueAnimator()
     private var circleAnimator = ValueAnimator()
 
-    private var buttonText = "Download"
+    private var buttonText = ""
     var buttonState: ButtonState by Delegates.observable(ButtonState.Completed) { p, old, new ->
         when(new) {
             ButtonState.Loading -> {
@@ -46,6 +46,7 @@ class LoadingButton @JvmOverloads constructor(
 
     init {
         buttonState = ButtonState.Clicked
+        buttonText = "Download"
     }
 
     override fun onDraw(canvas: Canvas?) {
@@ -79,41 +80,35 @@ class LoadingButton @JvmOverloads constructor(
     private fun load(){
         buttonText = "Loading"
         valueAnimator = ValueAnimator.ofFloat(0f, measuredWidth.toFloat()).apply {
-            duration = 3000
+            duration = 2000
+            repeatCount = ValueAnimator.INFINITE
+            repeatMode = ValueAnimator.RESTART
             addUpdateListener {
                 loadingWidth = animatedValue as Float
                 invalidate()
             }
         }
-        valueAnimator.addListener(object: AnimatorListenerAdapter(){
-            override fun onAnimationEnd(animation: Animator?) {
-                super.onAnimationEnd(animation)
-                buttonState = ButtonState.Completed
-            }
-        })
         valueAnimator.start()
     }
 
     private fun loadCircle(){
         circleAnimator = ValueAnimator.ofFloat(0f, 360f).apply {
-            duration = 3000
+            duration = 2000
             addUpdateListener {
+                repeatCount = ValueAnimator.INFINITE
+                repeatMode = ValueAnimator.RESTART
                 loadingAngle = animatedValue as Float
                 invalidate()
             }
         }
-        circleAnimator.addListener(object: AnimatorListenerAdapter(){
-            override fun onAnimationEnd(animation: Animator?) {
-                super.onAnimationEnd(animation)
-                buttonState = ButtonState.Completed
-            }
-        })
         circleAnimator.start()
     }
     private fun resetButton(){
         loadingWidth = 0f
         loadingAngle = 0f
         buttonText = "Download"
+        circleAnimator.cancel()
+        valueAnimator.cancel()
         invalidate()
     }
 
