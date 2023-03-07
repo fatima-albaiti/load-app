@@ -13,6 +13,7 @@ import android.net.Uri
 import android.os.Build
 import android.os.Bundle
 import android.renderscript.RenderScript.Priority
+import android.util.Log
 import android.widget.RadioGroup
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
@@ -55,6 +56,7 @@ class MainActivity : AppCompatActivity() {
     private val receiver = object : BroadcastReceiver() {
         override fun onReceive(context: Context?, intent: Intent?) {
             val id = intent?.getLongExtra(DownloadManager.EXTRA_DOWNLOAD_ID, -1)
+            Log.d("MainActivity", id.toString())
             onDownloadComplete()
         }
     }
@@ -85,11 +87,18 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun NotificationManager.sendNotification(message: String, applicationContext: Context) {
+        val intent = Intent(applicationContext, DetailActivity::class.java).apply {
+
+        }
+
+        val pendingIntent = PendingIntent.getActivity(applicationContext, 0, intent, PendingIntent.FLAG_UPDATE_CURRENT or PendingIntent.FLAG_IMMUTABLE)
+
         val builder = NotificationCompat.Builder(applicationContext, CHANNEL_ID)
             .setPriority(NotificationCompat.PRIORITY_HIGH)
             .setContentTitle("Download Complete")
             .setContentText(message)
             .setSmallIcon(R.drawable.ic_download_notif)
+            .addAction(R.drawable.ic_download_notif, "Details", pendingIntent)
 
         notify(NOTIFICATION_ID, builder.build())
     }
