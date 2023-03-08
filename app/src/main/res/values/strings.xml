@@ -11,4 +11,11 @@
     <string name="button_name">Click me</string>
     <string name="button_loading">We are loading </string>
     <string name="title_activity_detail">DetailActivity</string>
+    <string name="download_complete">Your file has completed downloading</string>
+    <string name="details">Details</string>
+    <string name="ttl_download_complete">Download Complete</string>
+    <string name="select_an_option">You must select an option</string>
+    <string name="option_glide">Glide</string>
+    <string name="option_load_app">Load App</string>
+    <string name="option_retrofit">RetroFit</string>
 </resources>
