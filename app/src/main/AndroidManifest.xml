@@ -16,7 +16,8 @@
             android:launchMode="singleTask"
             android:taskAffinity=""
             android:excludeFromRecents="true"
-            android:theme="@style/AppTheme.NoActionBar" />
+            android:theme="@style/AppTheme.NoActionBar"
+            android:noHistory="true"/>
         <activity
             android:name=".MainActivity"
             android:theme="@style/AppTheme.NoActionBar">

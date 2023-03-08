@@ -2,7 +2,7 @@
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
-    <LinearLayout
+    <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         app:layout_behavior="@string/appbar_scrolling_view_behavior"
@@ -12,6 +12,7 @@
         tools:showIn="@layout/activity_detail">
 
         <LinearLayout
+            android:id="@+id/name"
             android:layout_margin="10dp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -35,6 +36,7 @@
             android:layout_margin="10dp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_below="@id/name"
             android:weightSum="2">
             <TextView
                 android:id="@+id/label_status"
@@ -50,5 +52,13 @@
                 tools:text="Success" />
         </LinearLayout>
 
-    </LinearLayout>
+        <Button
+            android:id="@+id/btn_ok"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:backgroundTint="@android:color/holo_blue_dark"
+            android:text="@string/ok"
+            android:textColor="@android:color/white"
+            android:layout_alignParentBottom="true"/>
+    </RelativeLayout>
 </layout>

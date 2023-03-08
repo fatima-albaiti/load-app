@@ -18,4 +18,5 @@
     <string name="option_glide">Glide</string>
     <string name="option_load_app">Load App</string>
     <string name="option_retrofit">RetroFit</string>
+    <string name="ok">OK</string>
 </resources>
