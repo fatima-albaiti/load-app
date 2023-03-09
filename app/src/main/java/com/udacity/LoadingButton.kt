@@ -7,6 +7,7 @@ import android.graphics.Color
 import android.graphics.Paint
 import android.util.AttributeSet
 import android.view.View
+import androidx.core.content.withStyledAttributes
 import kotlin.properties.Delegates
 
 class LoadingButton @JvmOverloads constructor(
@@ -19,6 +20,11 @@ class LoadingButton @JvmOverloads constructor(
 
     private var valueAnimator = ValueAnimator()
     private var circleAnimator = ValueAnimator()
+
+    private var buttonColor = 0
+    private var buttonTextColor = 0
+    private var buttonLoadingColor = 0
+    private var loadingCircleColor = 0
 
     private var buttonText = ""
     var buttonState: ButtonState by Delegates.observable(ButtonState.Completed) { _, _, new ->
@@ -34,7 +40,6 @@ class LoadingButton @JvmOverloads constructor(
     }
 
     private val paint = Paint().apply {
-        color = Color.BLUE
         textSize = 55f
         textAlign = Paint.Align.CENTER
     }
@@ -42,6 +47,12 @@ class LoadingButton @JvmOverloads constructor(
     init {
         buttonState = ButtonState.Clicked
         buttonText = context.getString(R.string.download)
+        context.withStyledAttributes(attrs, R.styleable.LoadingButton) {
+            buttonColor = getColor(R.styleable.LoadingButton_buttonColor, 0)
+            buttonTextColor = getColor(R.styleable.LoadingButton_buttonTextColor, 0)
+            buttonLoadingColor = getColor(R.styleable.LoadingButton_buttonLoadingColor, 0)
+            loadingCircleColor = getColor(R.styleable.LoadingButton_circleLoadingColor, 0)
+        }
     }
 
     override fun onDraw(canvas: Canvas?) {
@@ -53,22 +64,22 @@ class LoadingButton @JvmOverloads constructor(
     }
 
     private fun drawButton(canvas: Canvas?) {
-        paint.color = Color.BLUE
+        paint.color = buttonColor
         canvas?.drawRect(0f, 0f, measuredWidth.toFloat(), measuredHeight.toFloat(), paint)
     }
 
     private fun drawText(canvas: Canvas?, text: String) {
-        paint.color = Color.WHITE
+        paint.color = buttonTextColor
         canvas?.drawText(text, measuredWidth.toFloat()/2, measuredHeight.toFloat()/2 - (paint.descent() + paint.ascent())/2, paint)
     }
 
     private fun drawLoadingRect(canvas: Canvas?) {
-        paint.color = Color.DKGRAY
+        paint.color = buttonLoadingColor
         canvas?.drawRect(0f, 0f, loadingWidth, measuredHeight.toFloat(), paint)
     }
 
     private fun drawCircle(canvas: Canvas?){
-        paint.color = Color.RED
+        paint.color = loadingCircleColor
         canvas?.drawArc(measuredWidth-170f, measuredHeight/2-40f, measuredWidth-80f, measuredHeight/2+40f, 0f, loadingAngle, true, paint)
     }
 

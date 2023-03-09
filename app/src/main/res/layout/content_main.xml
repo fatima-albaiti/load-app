@@ -45,8 +45,15 @@
     <com.udacity.LoadingButton
         android:id="@+id/custom_button"
         android:layout_width="match_parent"
-        android:layout_alignParentBottom="true"
         android:layout_height="60dp"
-        android:layout_margin="20dp" />
+        app:buttonColor="#3F51B5"
+        app:buttonLoadingColor="#313F8E"
+        app:buttonTextColor="#F0F6F5"
+        app:circleLoadingColor="#BC392F"
+        android:layout_alignParentBottom="true"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginEnd="20dp"
+        android:layout_marginBottom="20dp" />
 
 </RelativeLayout>
