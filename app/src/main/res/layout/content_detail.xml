@@ -2,18 +2,18 @@
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
-    <RelativeLayout
+    <androidx.constraintlayout.motion.widget.MotionLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        app:layout_behavior="@string/appbar_scrolling_view_behavior"
-        tools:context=".DetailActivity"
-        android:orientation="vertical"
-        android:padding="10dp"
-        tools:showIn="@layout/activity_detail">
+        android:paddingTop="?actionBarSize"
+        android:paddingBottom="20dp"
+        android:paddingHorizontal="20dp"
+        app:layoutDescription="@xml/content_detail_scene">
 
         <LinearLayout
             android:id="@+id/name"
             android:layout_margin="10dp"
+            android:paddingTop="20dp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:weightSum="2">
@@ -23,7 +23,7 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:text="File Name:"/>
+                android:text="@string/file_name"/>
             <TextView
                 android:id="@+id/file_name"
                 android:layout_width="0dp"
@@ -33,23 +33,24 @@
         </LinearLayout>
 
         <LinearLayout
+            android:id="@+id/status"
             android:layout_margin="10dp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_below="@id/name"
+            app:layout_constraintTop_toBottomOf="@id/name"
             android:weightSum="2">
-            <TextView
-                android:id="@+id/label_status"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:text="Status: " />
-            <TextView
-                android:id="@+id/file_status"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="3"
-                tools:text="Success" />
+        <TextView
+            android:id="@+id/label_status"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="Status: " />
+        <TextView
+            android:id="@+id/file_status"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="3"
+            tools:text="Success" />
         </LinearLayout>
 
         <Button
@@ -59,6 +60,7 @@
             android:backgroundTint="@android:color/holo_blue_dark"
             android:text="@string/ok"
             android:textColor="@android:color/white"
-            android:layout_alignParentBottom="true"/>
-    </RelativeLayout>
+            android:layout_margin="20dp" />
+
+    </androidx.constraintlayout.motion.widget.MotionLayout>
 </layout>
