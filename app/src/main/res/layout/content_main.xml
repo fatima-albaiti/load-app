@@ -42,22 +42,11 @@
             android:text="@string/option_retrofit" />
     </RadioGroup>
 
-    <androidx.constraintlayout.motion.widget.MotionLayout
+    <com.udacity.LoadingButton
+        android:id="@+id/custom_button"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
-        app:layoutDescription="@xml/content_main_scene">
-
-        <com.udacity.LoadingButton
-            android:id="@+id/custom_button"
-            android:layout_width="0dp"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            android:layout_height="60dp"
-            android:layout_margin="20dp"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
-
-    </androidx.constraintlayout.motion.widget.MotionLayout>
+        android:layout_height="60dp"
+        android:layout_margin="20dp" />
 
 </RelativeLayout>
