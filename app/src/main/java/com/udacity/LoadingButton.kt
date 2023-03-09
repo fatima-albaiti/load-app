@@ -1,17 +1,12 @@
 package com.udacity
 
-import android.animation.Animator
-import android.animation.AnimatorListenerAdapter
 import android.animation.ValueAnimator
 import android.content.Context
 import android.graphics.Canvas
 import android.graphics.Color
 import android.graphics.Paint
 import android.util.AttributeSet
-import android.util.Log
 import android.view.View
-import android.widget.Toast
-import androidx.core.animation.addListener
 import kotlin.properties.Delegates
 
 class LoadingButton @JvmOverloads constructor(
@@ -26,7 +21,7 @@ class LoadingButton @JvmOverloads constructor(
     private var circleAnimator = ValueAnimator()
 
     private var buttonText = ""
-    var buttonState: ButtonState by Delegates.observable(ButtonState.Completed) { p, old, new ->
+    var buttonState: ButtonState by Delegates.observable(ButtonState.Completed) { _, _, new ->
         when(new) {
             ButtonState.Loading -> {
                 load()
@@ -46,7 +41,7 @@ class LoadingButton @JvmOverloads constructor(
 
     init {
         buttonState = ButtonState.Clicked
-        buttonText = "Download"
+        buttonText = context.getString(R.string.download)
     }
 
     override fun onDraw(canvas: Canvas?) {
@@ -74,11 +69,11 @@ class LoadingButton @JvmOverloads constructor(
 
     private fun drawCircle(canvas: Canvas?){
         paint.color = Color.RED
-        canvas?.drawArc(0f, 0f, 100f, 100f, 0f, loadingAngle, true, paint)
+        canvas?.drawArc(measuredWidth-170f, measuredHeight/2-40f, measuredWidth-80f, measuredHeight/2+40f, 0f, loadingAngle, true, paint)
     }
 
     private fun load(){
-        buttonText = "Loading"
+        buttonText = context.getString(R.string.loading)
         valueAnimator = ValueAnimator.ofFloat(0f, measuredWidth.toFloat()).apply {
             duration = 2000
             repeatCount = ValueAnimator.INFINITE
@@ -106,7 +101,7 @@ class LoadingButton @JvmOverloads constructor(
     private fun resetButton(){
         loadingWidth = 0f
         loadingAngle = 0f
-        buttonText = "Download"
+        buttonText = context.getString(R.string.download)
         circleAnimator.cancel()
         valueAnimator.cancel()
         invalidate()

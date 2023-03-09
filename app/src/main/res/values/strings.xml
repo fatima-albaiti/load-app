@@ -19,4 +19,6 @@
     <string name="option_load_app">Load App</string>
     <string name="option_retrofit">RetroFit</string>
     <string name="ok">OK</string>
+    <string name="loading">Loading</string>
+    <string name="download">Download</string>
 </resources>
